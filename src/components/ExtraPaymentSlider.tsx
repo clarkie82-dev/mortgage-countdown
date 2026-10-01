@@ -31,7 +31,7 @@ export function ExtraPaymentSlider({
       <input
         type="range"
         min={0}
-        max={2000}
+        max={4000}
         step={50}
         value={extraPerMonth}
         onChange={(e) => onChange(Number(e.target.value))}
