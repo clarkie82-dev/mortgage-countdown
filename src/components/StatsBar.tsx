@@ -22,7 +22,7 @@ export function StatsBar({ summary, currency, forecastMode }: StatsBarProps) {
   return (
     <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <StatCard
-        label="Latest balance"
+        label="Remaining balance"
         value={formatMoney(summary.latestBalance, currency)}
       />
       <StatCard
