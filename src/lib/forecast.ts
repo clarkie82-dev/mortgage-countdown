@@ -199,24 +199,19 @@ export interface Milestone {
 }
 
 export function computeMilestones(
-  startingBalance: number,
+  _startingBalance: number,
   latestBalance: number,
 ): Milestone[] {
   const defs = [
-    { id: '75', label: '75% paid down', fraction: 0.25 },
-    { id: '50', label: '50% paid down', fraction: 0.5 },
-    { id: '25', label: '25% remaining', fraction: 0.25 },
-    { id: '100k', label: 'Under $100k', fraction: null as number | null },
+    { id: '50k', label: 'Under $50k', targetBalance: 50_000 },
+    { id: '25k', label: 'Under $25k', targetBalance: 25_000 },
+    { id: '10k', label: 'Under $10k', targetBalance: 10_000 },
   ]
 
-  return defs.map((d) => {
-    const targetBalance =
-      d.fraction !== null ? startingBalance * d.fraction : 100_000
-    return {
-      id: d.id,
-      label: d.label,
-      targetBalance,
-      reached: latestBalance <= targetBalance,
-    }
-  })
+  return defs.map((d) => ({
+    id: d.id,
+    label: d.label,
+    targetBalance: d.targetBalance,
+    reached: latestBalance <= d.targetBalance,
+  }))
 }
