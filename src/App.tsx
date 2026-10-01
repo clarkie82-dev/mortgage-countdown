@@ -85,11 +85,6 @@ function App() {
             currency={data.currency}
             forecastMode={data.forecastMode}
           />
-          <BalanceChart
-            data={chartData}
-            currency={data.currency}
-            payoffDate={sliderSummary.payoffDate}
-          />
           <ExtraPaymentSlider
             currency={data.currency}
             extraPerMonth={extraPerMonth}
@@ -101,6 +96,11 @@ function App() {
                 : 0
             }
             payoffDate={formatDateDisplay(sliderSummary.payoffDate)}
+          />
+          <BalanceChart
+            data={chartData}
+            currency={data.currency}
+            payoffDate={sliderSummary.payoffDate}
           />
           <Milestones milestones={milestones} />
           <EntryTable entries={data.entries} currency={data.currency} />

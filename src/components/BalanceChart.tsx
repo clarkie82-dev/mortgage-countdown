@@ -30,6 +30,10 @@ export function BalanceChart({ data, currency, payoffDate }: BalanceChartProps) 
       p.kind === 'forecast' || p.date === lastActualDate ? p.balance : undefined,
   }))
 
+  // Match the green marker to where the forecast hits $0 (updates with extra-payment slider)
+  const chartPayoffDate =
+    [...merged].reverse().find((row) => row.forecast !== undefined)?.date ?? payoffDate
+
   return (
     <section className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-6">
       <h2 className="mb-4 text-left text-lg font-semibold text-slate-900 dark:text-slate-100">
@@ -37,7 +41,11 @@ export function BalanceChart({ data, currency, payoffDate }: BalanceChartProps) 
       </h2>
       <div className="h-80 w-full min-w-0">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={merged} margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
+          <LineChart
+            key={chartPayoffDate}
+            data={merged}
+            margin={{ top: 8, right: 16, left: 8, bottom: 8 }}
+          >
             <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
             <XAxis
               dataKey="date"
@@ -57,7 +65,8 @@ export function BalanceChart({ data, currency, payoffDate }: BalanceChartProps) 
             />
             <Legend />
             <ReferenceLine
-              x={payoffDate}
+              key={chartPayoffDate}
+              x={chartPayoffDate}
               stroke="#10b981"
               strokeDasharray="4 4"
               ifOverflow="extendDomain"
