@@ -20,7 +20,7 @@ function rateSourceLabel(source: ForecastSummary['rateSource']): string {
 
 export function StatsBar({ summary, currency, forecastMode }: StatsBarProps) {
   return (
-    <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <StatCard
         label="Latest balance"
         value={formatMoney(summary.latestBalance, currency)}
@@ -34,10 +34,6 @@ export function StatsBar({ summary, currency, forecastMode }: StatsBarProps) {
         label="Progress"
         value={`${summary.progressPercent.toFixed(1)}%`}
         hint="vs first entry"
-      />
-      <StatCard
-        label="Starting balance"
-        value={formatMoney(summary.startingBalance, currency)}
       />
     </section>
   )
