@@ -1,0 +1,8 @@
+{
+  "currency": "AUD",
+  "forecastMonthlyReduction": 6000,
+  "forecastMode": "auto",
+  "entries": [
+    { "date": "2026-10-01", "balance": 65000 }
+  ]
+}

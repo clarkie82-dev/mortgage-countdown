@@ -1,0 +1,15 @@
+---
+description: Monthly mortgage balance update workflow
+globs: data/mortgage.json
+---
+
+# Monthly mortgage update
+
+When updating mortgage data:
+
+1. Append one object to `entries`: `{ "date": "YYYY-MM-DD", "balance": <number> }`.
+2. Keep entries sorted by date (or sort on save).
+3. Optionally adjust `forecastMonthlyReduction` or set `forecastMode` to `"auto"` / `"manual"`.
+4. Run `npm run validate` before commit.
+
+Do not store secrets in this repo; balance data is public.
