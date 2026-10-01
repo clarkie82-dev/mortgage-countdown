@@ -21,10 +21,13 @@ interface BalanceChartProps {
 export function BalanceChart({ data, currency, payoffDate }: BalanceChartProps) {
   const actual = data.filter((p) => p.kind === 'actual')
   const forecast = data.filter((p) => p.kind === 'forecast')
+  const lastActualDate = actual.at(-1)?.date
   const merged = data.map((p) => ({
     date: p.date,
     actual: p.kind === 'actual' ? p.balance : undefined,
-    forecast: p.kind === 'forecast' ? p.balance : undefined,
+    // Anchor forecast at the latest actual so the line starts on the real snapshot
+    forecast:
+      p.kind === 'forecast' || p.date === lastActualDate ? p.balance : undefined,
   }))
 
   return (
@@ -57,6 +60,7 @@ export function BalanceChart({ data, currency, payoffDate }: BalanceChartProps) 
               x={payoffDate}
               stroke="#10b981"
               strokeDasharray="4 4"
+              ifOverflow="extendDomain"
               label={{ value: 'Payoff', position: 'insideTopRight', fontSize: 11 }}
             />
             <Line
